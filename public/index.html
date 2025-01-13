@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Records</title>
+</head>
+<body>
+    <h1>Add Training Record</h1>
+    <form id="trainingForm">
+        <label for="trainingName">Training Name:</label>
+        <input type="text" id="trainingName" name="trainingName" required>
+        <br>
+        <label for="participants">Participants:</label>
+        <input type="text" id="participants" name="participants" required>
+        <br>
+        <label for="trainingDate">Training Date:</label>
+        <input type="date" id="trainingDate" name="trainingDate" required>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Training Records</h2>
+    <ul id="recordsList"></ul>
+
+    <script>
+        // 加载所有培训记录
+        async function loadRecords() {
+            const response = await fetch('/compliance-training');
+            const records = await response.json();
+            const list = document.getElementById('recordsList');
+            list.innerHTML = '';
+            records.forEach(record => {
+                const li = document.createElement('li');
+                li.textContent = `${record.trainingName} - ${record.participants} (${new Date(record.trainingDate).toLocaleDateString()})`;
+                list.appendChild(li);
+            });
+        }
+
+        // 提交表单
+        document.getElementById('trainingForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/compliance-training', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                alert('Record added successfully!');
+                loadRecords();
+            }
+        });
+
+        // 页面加载时加载记录
+        loadRecords();
+    </script>
+</body>
+</html>
