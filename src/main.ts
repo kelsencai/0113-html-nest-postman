@@ -5,7 +5,7 @@ import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.useStaticAssets(join(__dirname, '..', 'public')); // 提供静态文件服务
+  app.useStaticAssets(join(__dirname, '..', 'public')); // 启用静态文件服务
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
