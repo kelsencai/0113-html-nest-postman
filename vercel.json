@@ -1,9 +1,0 @@
-{
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    },
-    "src": ".", // 指定根目录
-    "use": "@vercel/node"
-  }
-}
