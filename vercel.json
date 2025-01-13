@@ -3,7 +3,7 @@
     "env": {
       "NODE_ENV": "production"
     },
-    "src": "012-html-nest-postman", // 指定根目录
+    "src": "0113-html-nest-postman", // 指定根目录
     "use": "@vercel/node"
   }
 }
