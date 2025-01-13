@@ -3,13 +3,7 @@
     "env": {
       "NODE_ENV": "production"
     },
-    "src": "src/main.ts",
     "use": "@vercel/node"
   },
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ]
+  "rootDirectory": "0113-html-nest-postman" // 指定根目录
 }
